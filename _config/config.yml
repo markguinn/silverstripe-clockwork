@@ -1,0 +1,21 @@
+---
+Name: clockworkconfig
+---
+Injector:
+  ClockworkFilter:
+    class: 'Clockwork\Support\Silverstripe\RequestFilter'
+  ClockworkTimeline:
+    class: 'Clockwork\Request\Timeline'
+  RequestProcessor:
+    class: RequestProcessor
+    properties:
+      filters:
+        - '%$ClockworkFilter'
+
+Controller:
+  extensions:
+    - 'Clockwork\Support\Silverstripe\ClockworkControllerExtension'
+
+Director:
+  rules:
+    '__clockwork': 'Clockwork\Support\Silverstripe\ClockworkController'

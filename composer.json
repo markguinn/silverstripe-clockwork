@@ -1,0 +1,23 @@
+{
+	"name": "markguinn/silverstripe-clockwork",
+	"description": "Silverstripe extension integrating the Clockwork Chrome extension",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "clockwork", "debugging", "logging", "queries", "timeline", "profiling"],
+	"authors": [
+		{
+			"name": "Mark Guinn",
+			"homepage": "http://github.com/markguinn",
+            "role": "Developer"
+		}
+	],
+	"require": {
+		"silverstripe/framework": "~3.1",
+		"itsgoingd/clockwork": "~1.6"
+	},
+	"extra": {
+		"installer-name": "clockwork",
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}
