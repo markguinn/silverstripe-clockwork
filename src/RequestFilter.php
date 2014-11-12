@@ -62,6 +62,7 @@ class RequestFilter implements \RequestFilter
         if (Director::isDev()) {
             $response->addHeader("X-Clockwork-Id", $this->clockwork->getRequest()->id);
             $response->addHeader("X-Clockwork-Version", Clockwork::VERSION);
+            $response->addHeader('X-Clockwork-Path', Director::baseURL() . '__clockwork/');
             $this->clockwork->resolveRequest();
             $this->clockwork->storeRequest();
         }
