@@ -6,6 +6,8 @@ Injector:
     class: 'Clockwork\Support\Silverstripe\RequestFilter'
   ClockworkTimeline:
     class: 'Clockwork\Request\Timeline'
+  ClockworkLog:
+    class: 'Clockwork\Request\Log'
   RequestProcessor:
     class: RequestProcessor
     properties:

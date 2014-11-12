@@ -38,6 +38,10 @@ class SilverstripeDataSource extends DataSource
             $request->databaseQueries = $db->getQueries();
         }
 
+        // Retrieve the log
+        $log = Injector::inst()->get('ClockworkLog');
+        $request->log = $log->toArray();
+
         return $request;
     }
 } 

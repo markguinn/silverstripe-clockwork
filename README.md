@@ -27,10 +27,14 @@ Injector::inst()->get('ClockworkTimeline')->startEvent('myevent1', 'Description 
 Injector::inst()->get('ClockworkTimeline')->endEvent('myevent1');
 ```
 
+You can also use SilverStripe's logging to output to Clockwork:
+
+```php
+SS_Log::log('Some error', Zend_Log::ERR);
+```
 
 Todo List
 ---------
-- Integrate SS_Log for logging (Debug::log is too janky at this point)
 - Integrate the embeddable web version for non-chrome-users: https://github.com/itsgoingd/clockwork-web
 
 
