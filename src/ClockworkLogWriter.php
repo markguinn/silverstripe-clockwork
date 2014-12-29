@@ -7,22 +7,30 @@
  */
 
 namespace Clockwork\Support\Silverstripe;
-use Clockwork\Storage\FileStorage;
-use Clockwork\Request\Log;
 use Controller;
-use SS_HTTPRequest;
 use Psr\Log\LogLevel as LogLevel;
+use Injector;
+use Director;
 
 require_once 'Zend/Log/Writer/Abstract.php';
 
 class ClockworkLogWriter extends \Zend_Log_Writer_Abstract {
 
+	/**
+	 * @param array|\Zend_Config $config
+	 * @return ClockworkLogWriter
+	 */
 	public static function factory($config) {
-		return new Clockwork\Support\Silverstripe\ClockworkLogWriter();
+		return new ClockworkLogWriter();
 	}
 
+
+	/**
+	 * @param array $event
+	 */
 	public function _write($event) {
-		$log = \Injector::inst()->get('ClockworkLog');
+		/** @var \Clockwork\Request\Log $log */
+		$log = Injector::inst()->get('ClockworkLog');
 
 		// Map levels
 		$levelMap = $this->getLevelMap();
@@ -33,12 +41,13 @@ class ClockworkLogWriter extends \Zend_Log_Writer_Abstract {
 		$errfile = $event['message']['errfile'];
 		$errline = $event['message']['errline'];
 		$errcontext = $event['message']['errcontext'];
-		$relfile = \Director::makeRelative($errfile);
+		$relfile = Director::makeRelative($errfile);
 
 		// Save message
 		$message = "{$errstr} ({$relfile}:{$errline})";
-		$log->log($level, $message, $errcontext);
+		$log->log($level, $message, is_array($errcontext) ? $errcontext : array($errcontext));
 	}
+
 
 	/**
 	 * @see https://github.com/itsgoingd/clockwork/wiki/Development-notes
