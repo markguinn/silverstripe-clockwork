@@ -33,7 +33,8 @@ class RequestFilter implements \RequestFilter
      * @return boolean Whether to continue processing other filters. Null or true will continue processing (optional)
      */
     public function preRequest(SS_HTTPRequest $request, Session $session, DataModel $model) {
-        if (Director::isDev()) {
+        if (Director::isDev() && class_exists('Clockwork\\Clockwork')) {
+
             $this->clockwork = new Clockwork();
 
             // Wrap the current database adapter in a proxy object so we can log queries
@@ -59,7 +60,7 @@ class RequestFilter implements \RequestFilter
      * @return boolean Whether to continue processing other filters. Null or true will continue processing (optional)
      */
     public function postRequest(SS_HTTPRequest $request, SS_HTTPResponse $response, DataModel $model) {
-        if (Director::isDev()) {
+        if (isset($this->clockwork)) {
             $response->addHeader("X-Clockwork-Id", $this->clockwork->getRequest()->id);
             $response->addHeader("X-Clockwork-Version", Clockwork::VERSION);
             $response->addHeader('X-Clockwork-Path', Director::baseURL() . '__clockwork/');
