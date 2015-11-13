@@ -31,8 +31,8 @@ class DatabaseProxy extends SS_Database
     {
         $this->realConn = $realConn;
         $this->connector = $this->connector ?: $realConn->getConnector();
-        $this->schemaManager = $this->connector ?: $realConn->getSchemaManager();
-        $this->queryBuilder = $this->connector ?: $realConn->getQueryBuilder();
+        $this->schemaManager = $this->schemaManager ?: $realConn->getSchemaManager();
+        $this->queryBuilder = $this->queryBuilder ?: $realConn->getQueryBuilder();
         $this->queries = [];
     }
 
