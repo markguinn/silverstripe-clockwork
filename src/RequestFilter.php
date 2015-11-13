@@ -37,8 +37,15 @@ class RequestFilter implements \RequestFilter
 
             $this->clockwork = new Clockwork();
 
+            if (!DB::get_conn()) {
+                global $databaseConfig;
+                if ($databaseConfig) {
+                    DB::connect($databaseConfig);
+                }
+            }
+
             // Wrap the current database adapter in a proxy object so we can log queries
-            DB::setConn(new DatabaseProxy(DB::getConn()));
+            DB::set_conn(new DatabaseProxy(DB::get_conn()));
             $this->clockwork->addDataSource(new SilverstripeDataSource());
 
             // Attach a default datasource that comes with
