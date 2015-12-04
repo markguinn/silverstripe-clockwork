@@ -12,6 +12,8 @@ NOTE: This extension is only active when your site is in dev mode. There should
 be no slowdown in live mode because the database proxy adapter is not installed
 and clockwork is never activated.
 
+**NOTE:** This version requires SilverStripe 3.2. For 3.1 compatibility use v0.1.0
+
 
 Usage
 -----
