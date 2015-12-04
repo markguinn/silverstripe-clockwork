@@ -22,6 +22,7 @@ use DB;
 
 class RequestFilter implements \RequestFilter
 {
+	/** @var Clockwork */
     protected $clockwork;
 
     /**

@@ -28,8 +28,11 @@ class ClockworkControllerExtension extends Extension
     public function onAfterInit() {
         if (Director::isDev() && class_exists('Clockwork\\Request\\Timeline')) {
             $injector = Injector::inst();
-            $injector->get('ClockworkTimeline')->endEvent(get_class($this->owner) . '_init');
-            $injector->get('ClockworkTimeline')->startEvent(
+
+			/** @var \Clockwork\Request\Timeline $timeline */
+			$timeline = $injector->get('ClockworkTimeline');
+			$timeline->endEvent(get_class($this->owner) . '_init');
+            $timeline->startEvent(
                 get_class($this->owner) . '_action',
                 get_class($this->owner) . ' action ' . $this->owner->getRequest()->param('Action')
             );

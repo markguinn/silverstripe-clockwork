@@ -42,6 +42,10 @@ class SilverstripeDataSource extends DataSource
         $log = Injector::inst()->get('ClockworkLog');
         $request->log = $log->toArray();
 
+		// Fill in the rest of the request - these may not be finalized yet when the PhpDataSource sees them
+		$request->cookies = \Cookie::get_all();
+		$request->sessionData = \Session::get_all();
+
         return $request;
     }
-} 
+}
