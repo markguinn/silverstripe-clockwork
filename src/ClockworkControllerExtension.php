@@ -18,6 +18,7 @@ class ClockworkControllerExtension extends Extension
 {
     public function onBeforeInit() {
         if (Director::isDev() && class_exists('Clockwork\\Request\\Timeline')) {
+			Injector::inst()->get('ClockworkTimeline')->addEvent('framework_boot', 'Framework boot', $_SERVER['REQUEST_TIME_FLOAT'], microtime(true));
             Injector::inst()->get('ClockworkTimeline')->startEvent(
                 get_class($this->owner) . '_init',
                 get_class($this->owner) . ' initialization'
@@ -36,6 +37,8 @@ class ClockworkControllerExtension extends Extension
                 get_class($this->owner) . '_action',
                 get_class($this->owner) . ' action ' . $this->owner->getRequest()->param('Action')
             );
+
+			SilverstripeDataSource::$controller = get_class($this->owner);
         }
     }
 }

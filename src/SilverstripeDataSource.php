@@ -20,6 +20,8 @@ use Injector;
 
 class SilverstripeDataSource extends DataSource
 {
+	public static $controller;
+
     /**
      * The entry-point. called by Clockwork itself.
      * @param Request $request
@@ -46,6 +48,13 @@ class SilverstripeDataSource extends DataSource
 		$request->cookies = \Cookie::get_all();
 		$request->sessionData = \Session::get_all();
 
-        return $request;
+		// Give some knowledge about the controller if we have it
+		if (isset(self::$controller)) {
+			$request->controller = self::$controller;
+		}
+
+		// TODO: routing
+
+		return $request;
     }
 }
