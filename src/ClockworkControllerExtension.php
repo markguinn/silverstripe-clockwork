@@ -17,7 +17,7 @@ use Director;
 class ClockworkControllerExtension extends Extension
 {
     public function onBeforeInit() {
-        if (Director::isDev() && class_exists('Clockwork\\Request\\ClockworkTimeline')) {
+        if (Director::isDev() && class_exists('Clockwork\\Request\\Timeline')) {
             Injector::inst()->get('ClockworkTimeline')->startEvent(
                 get_class($this->owner) . '_init',
                 get_class($this->owner) . ' initialization'
@@ -26,7 +26,7 @@ class ClockworkControllerExtension extends Extension
     }
 
     public function onAfterInit() {
-        if (Director::isDev() && class_exists('Clockwork\\Request\\ClockworkTimeline')) {
+        if (Director::isDev() && class_exists('Clockwork\\Request\\Timeline')) {
             $injector = Injector::inst();
             $injector->get('ClockworkTimeline')->endEvent(get_class($this->owner) . '_init');
             $injector->get('ClockworkTimeline')->startEvent(
