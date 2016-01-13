@@ -39,6 +39,12 @@ Todo List
 ---------
 - Integrate the embeddable web version for non-chrome-users: https://github.com/itsgoingd/clockwork-web
 
+Screenshots
+-----------
+
+![Database queries in Chrome Dev Tools](docs/_images/screenshot_database.png)
+
+![Execution timeline in Chrome Dev Tools](docs/_images/screenshot_timeline.png)
 
 Developer(s)
 ------------
