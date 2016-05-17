@@ -224,4 +224,9 @@ class DatabaseProxy extends SS_Database
     {
         return call_user_func_array([$this->realConn, __FUNCTION__], func_get_args());
     }
+    
+    public function clearTable($table)
+    {
+        return call_user_func_array([$this->realConn, __FUNCTION__], func_get_args());
+    }
 }
